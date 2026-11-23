@@ -1,0 +1,2207 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>خلية الجبل: سرّ الخائن - وضع الكارتا</title>
+  <style>
+    :root {
+      --bg-dark: #070c10;
+      --bg-card: #111a22;
+      --bg-card-2: #182530;
+      --accent: #e5a93c;
+      --accent-hover: #f5be58;
+      --danger: #d64545;
+      --success: #1f9d5c;
+      --text-main: #f1f5f9;
+      --text-muted: #94a8ba;
+      --border: #253646;
+
+      /* ألوان بطاقات الكارتا وأونو */
+      --uno-red: #d92d2d;
+      --uno-blue: #1b6de0;
+      --uno-green: #1e9e54;
+      --uno-gold: #e59b14;
+      --uno-wild: #4c1d95;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 85% 10%, rgba(30, 158, 84, 0.16) 0%, transparent 40%),
+        radial-gradient(circle at 15% 20%, rgba(217, 45, 45, 0.14) 0%, transparent 40%),
+        linear-gradient(180deg, #0c141c 0%, #060a0e 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 12px 10px 88px;
+      line-height: 1.5;
+    }
+
+    .app-container {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    /* رأس الصفحة الاحترافي */
+    .app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, rgba(20, 31, 41, 0.96), rgba(13, 20, 27, 0.96));
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-emblem {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #166534, #991b1b);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .app-header h1 {
+      font-size: 1.15rem;
+      color: var(--accent);
+      line-height: 1.25;
+    }
+
+    .app-header p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .header-pill {
+      background: rgba(229, 169, 60, 0.14);
+      border: 1px solid rgba(229, 169, 60, 0.45);
+      color: #fde68a;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    /* جميع الشاشات مخفية افتراضياً عبر display: none */
+    .screen {
+      display: none;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
+    }
+
+    .screen-title {
+      font-size: 1.25rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .desc-text {
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      font-size: 0.92rem;
+    }
+
+    /* تصميم المنيو الاحترافي */
+    .menu-hero {
+      position: relative;
+      background: linear-gradient(135deg, #13251e 0%, #16222e 55%, #2a171c 100%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 18px 16px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .menu-hero-text {
+      flex: 1 1 260px;
+    }
+
+    .menu-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(30, 158, 84, 0.22);
+      border: 1px solid rgba(34, 197, 94, 0.45);
+      color: #86efac;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .menu-hero h2 {
+      font-size: 1.32rem;
+      color: #fff;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .menu-hero p {
+      font-size: 0.87rem;
+      color: #cbd5e1;
+    }
+
+    .mini-cards-showcase {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 4px;
+      flex-shrink: 0;
+    }
+
+    .mini-card {
+      width: 50px;
+      height: 74px;
+      border-radius: 9px;
+      border: 2px solid #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: #fff;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+    }
+
+    .mini-card.c1 {
+      background: linear-gradient(145deg, #ef4444, #991b1b);
+      transform: rotate(10deg);
+      margin-left: -14px;
+    }
+
+    .mini-card.c2 {
+      background: linear-gradient(145deg, #22c55e, #166534);
+      transform: translateY(-6px);
+      z-index: 2;
+    }
+
+    .mini-card.c3 {
+      background: linear-gradient(145deg, #f59e0b, #b45309);
+      transform: rotate(-10deg);
+      margin-right: -14px;
+    }
+
+    .mini-card span {
+      font-size: 0.52rem;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    .pro-menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin-bottom: 14px;
+    }
+
+    .pro-menu-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      text-align: right;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    }
+
+    .pro-menu-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4);
+    }
+
+    .pro-menu-btn.primary-card {
+      background: linear-gradient(135deg, #e5a93c, #c47f17);
+      color: #111827;
+    }
+
+    .pro-menu-btn.bots-card {
+      background: linear-gradient(135deg, #1b8a52, #115e38);
+      color: #ffffff;
+    }
+
+    .pro-menu-btn.rules-card {
+      background: linear-gradient(135deg, #1d2c3a, #15212c);
+      color: #f1f5f9;
+      border-color: var(--border);
+    }
+
+    .pro-btn-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pro-btn-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      flex-shrink: 0;
+    }
+
+    .pro-btn-title {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .pro-btn-sub {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      opacity: 0.86;
+      margin-top: 2px;
+    }
+
+    .pro-btn-arrow {
+      font-size: 1.15rem;
+      font-weight: 900;
+      opacity: 0.85;
+    }
+
+    .menu-stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .stat-pill {
+      background: #0d151d;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 6px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .stat-pill strong {
+      display: block;
+      color: var(--accent);
+      font-size: 0.86rem;
+    }
+
+    /* الأزرار العامة */
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      padding: 11px 16px;
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: #fff;
+      background: #2b3f52;
+      transition: transform 0.14s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #111;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-success {
+      background: var(--success);
+    }
+
+    .btn-danger {
+      background: var(--danger);
+    }
+
+    .btn-secondary {
+      background: #223241;
+      border: 1px solid var(--border);
+    }
+
+    .panel {
+      background: var(--bg-card-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+
+    .presets-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .presets-row button {
+      padding: 8px 6px;
+      font-size: 0.85rem;
+    }
+
+    .difficulty-group {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .mode-switch-group {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .diff-btn.active,
+    .carta-btn.active {
+      background: var(--accent);
+      color: #111;
+    }
+
+    .role-box {
+      text-align: center;
+      padding: 22px 14px;
+      border: 2px dashed var(--accent);
+      border-radius: 14px;
+      background: #0d151d;
+      margin-bottom: 14px;
+    }
+
+    .role-badge {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      background: #263645;
+      color: var(--accent);
+    }
+
+    /* لافتة الإعلانات */
+    .ad-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: linear-gradient(90deg, #173827, #2c171c);
+      border: 1px solid var(--accent);
+      border-radius: 10px;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      font-size: 0.84rem;
+    }
+
+    .ad-banner button {
+      padding: 5px 9px;
+      font-size: 0.8rem;
+      background: var(--danger);
+    }
+
+    /* شريط الخصوصية ووضع الكارتا */
+    .privacy-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+      background: #0d1720;
+      border: 1px solid #2b4558;
+      border-radius: 10px;
+      padding: 7px 12px;
+      margin-bottom: 10px;
+      font-size: 0.8rem;
+      color: #bae6fd;
+    }
+
+    /* شريط الاتصال الصوتي */
+    .voice-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #0d151d;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+    }
+
+    .voice-status {
+      font-size: 0.85rem;
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .voice-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .voice-controls button {
+      padding: 7px 10px;
+      font-size: 0.82rem;
+    }
+
+    .voice-controls button.muted {
+      background: #4b5563;
+      color: #e5e7eb;
+    }
+
+    /* شريط الخصوم (بطاقاتهم مخفية في هواتفهم فقط) */
+    .opponents-strip {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 10px;
+    }
+
+    .opponent-chip {
+      flex: 0 0 auto;
+      background: #0d151d;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 6px 10px;
+      font-size: 0.78rem;
+      text-align: center;
+      min-width: 92px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .opponent-chip.active-turn {
+      border-color: var(--accent);
+      box-shadow: 0 0 12px rgba(229, 169, 60, 0.45);
+      background: #1d2e3c;
+      transform: translateY(-2px);
+    }
+
+    .hidden-backs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      margin-top: 3px;
+      color: #fde047;
+      font-weight: 700;
+    }
+
+    /* طاولة وضع الكارتا مع مسرح الأنيميشن */
+    .uno-table {
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at center, #1b382b 0%, #0d1c16 85%);
+      border: 2px solid #2e5945;
+      border-radius: 18px;
+      padding: 14px 10px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .turn-banner {
+      display: inline-block;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #fde68a;
+    }
+
+    .table-piles {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* شكل بطاقة الكارتا وأونو للجوال */
+    .uno-card {
+      position: relative;
+      width: 86px;
+      height: 128px;
+      border-radius: 14px;
+      border: 3px solid #ffffff;
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.55);
+      user-select: none;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .uno-card.color-red {
+      background: linear-gradient(145deg, #ef4444, #991b1b);
+    }
+    .uno-card.color-blue {
+      background: linear-gradient(145deg, #3b82f6, #1e40af);
+    }
+    .uno-card.color-green {
+      background: linear-gradient(145deg, #22c55e, #166534);
+    }
+    .uno-card.color-gold {
+      background: linear-gradient(145deg, #f59e0b, #b45309);
+    }
+    .uno-card.color-wild {
+      background: conic-gradient(from 45deg, #ef4444, #3b82f6, #22c55e, #f59e0b, #ef4444);
+    }
+
+    .uno-card-oval {
+      width: 68px;
+      height: 82px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.25);
+      border: 2px solid rgba(255, 255, 255, 0.65);
+      transform: rotate(-14deg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+    }
+
+    .uno-card-oval-inner {
+      transform: rotate(14deg);
+      text-align: center;
+    }
+
+    .uno-card-main {
+      font-size: 1.45rem;
+      font-weight: 900;
+      line-height: 1.1;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.65);
+    }
+
+    .uno-card-label {
+      font-size: 0.66rem;
+      font-weight: 700;
+      margin-top: 2px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    }
+
+    .uno-corner {
+      position: absolute;
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    }
+
+    .uno-corner.top {
+      top: 5px;
+      right: 7px;
+    }
+
+    .uno-corner.bottom {
+      bottom: 5px;
+      left: 7px;
+    }
+
+    /* أنيميشن وضع البطاقة على الطاولة (من اللاعب أو من الخصم) */
+    .flying-card {
+      display: none;
+      position: absolute;
+      left: 50%;
+      top: 56%;
+      margin-left: -43px;
+      margin-top: -64px;
+      z-index: 25;
+      pointer-events: none;
+    }
+
+    @keyframes throwFromPlayer {
+      0% {
+        transform: translateY(125px) scale(0.84) rotate(-14deg);
+        opacity: 0.45;
+      }
+      65% {
+        transform: translateY(-10px) scale(1.14) rotate(5deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(0) scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    @keyframes throwFromOpponent {
+      0% {
+        transform: translateY(-120px) scale(0.65) rotate(18deg);
+        opacity: 0.35;
+      }
+      65% {
+        transform: translateY(8px) scale(1.12) rotate(-6deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(0) scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    @keyframes cardLandImpact {
+      0% { transform: scale(0.9); }
+      55% { transform: scale(1.09); }
+      100% { transform: scale(1); }
+    }
+
+    .anim-from-player {
+      animation: throwFromPlayer 0.36s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .anim-from-opponent {
+      animation: throwFromOpponent 0.40s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .anim-impact {
+      animation: cardLandImpact 0.24s ease-out;
+    }
+
+    /* كومة السحب */
+    .draw-pile-btn {
+      width: 86px;
+      height: 128px;
+      border-radius: 14px;
+      border: 3px solid #fff;
+      background: linear-gradient(145deg, #1f2937, #090d12);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.55);
+      padding: 6px;
+    }
+
+    .draw-pile-btn .deck-logo {
+      background: var(--danger);
+      color: #fde047;
+      font-weight: 900;
+      font-size: 0.9rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      transform: rotate(-12deg);
+      border: 2px solid #fff;
+      margin-bottom: 6px;
+    }
+
+    .draw-pile-btn span {
+      font-size: 0.76rem;
+      color: #e5e7eb;
+    }
+
+    /* لوحة اختيار اللون لبطاقة الجوكر - مخفية افتراضياً عبر display: none */
+    #color-picker-panel {
+      display: none;
+      background: #0e1821;
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .color-choices {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .color-choices button {
+      padding: 10px 6px;
+      font-size: 0.84rem;
+    }
+
+    /* يد اللاعب على الموبايل (تظهر بطاقاتك في هاتفك فقط) */
+    .hand-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .uno-hand-fan {
+      display: flex;
+      align-items: flex-end;
+      overflow-x: auto;
+      padding: 22px 14px 14px;
+      min-height: 168px;
+      background: linear-gradient(180deg, rgba(16, 25, 34, 0.35), rgba(8, 13, 18, 0.9));
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      margin-bottom: 10px;
+      scrollbar-width: thin;
+    }
+
+    .hand-card-btn {
+      display: none;
+      margin-right: -18px;
+      transition: transform 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .hand-card-btn:first-child {
+      margin-right: 0;
+    }
+
+    .hand-card-btn.playable {
+      transform: translateY(-10px);
+      box-shadow: 0 0 0 3px #fde047, 0 10px 20px rgba(0, 0, 0, 0.6);
+      z-index: 4;
+    }
+
+    .hand-card-btn.unplayable {
+      opacity: 0.72;
+    }
+
+    .hand-card-btn:hover {
+      transform: translateY(-16px) scale(1.05);
+      z-index: 10;
+    }
+
+    .uno-shout-btn {
+      background: linear-gradient(135deg, #16a34a, #dc2626);
+      color: #fff;
+      font-weight: 900;
+      padding: 8px 14px;
+      font-size: 0.88rem;
+      border: 2px solid #fff;
+      border-radius: 999px;
+    }
+
+    .event-log {
+      background: #0b1218;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      min-height: 58px;
+      font-size: 0.87rem;
+      color: #d7e2ec;
+      margin-bottom: 12px;
+    }
+
+    /* التصويت */
+    .vote-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .vote-player-btn {
+      display: none;
+      text-align: center;
+      background: #1a2835;
+      border: 1px solid var(--border);
+      padding: 10px;
+      font-size: 0.92rem;
+    }
+
+    .vote-player-btn.selected {
+      background: var(--danger);
+      border-color: #ff9f9f;
+    }
+
+    .result-box {
+      display: none;
+      background: #0d161e;
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    .rules-list {
+      padding-right: 20px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .rules-list li {
+      margin-bottom: 8px;
+    }
+
+    footer.copyright-footer {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* شريط التشخيص الصغير في أسفل الشاشة */
+    #debug-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #060a0d;
+      border-top: 2px solid var(--accent);
+      color: #f8fafc;
+      padding: 8px 12px;
+      font-size: 0.82rem;
+      text-align: center;
+      z-index: 100;
+      direction: rtl;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- رأس احترافي موحد -->
+    <header class="app-header">
+      <div class="brand-wrap">
+        <div class="brand-emblem">🇩🇿</div>
+        <div>
+          <h1>خلية الجبل: سرّ الخائن</h1>
+          <p>وضع الكارتا • التحليل والمكر الثوري</p>
+        </div>
+      </div>
+      <div class="header-pill">⛰️ حتى 15+ لاعباً</div>
+    </header>
+
+    <!-- 1. الشاشة الرئيسية (المنيو الاحترافي) -->
+    <section id="screen-home" class="screen">
+      <div class="menu-hero">
+        <div class="menu-hero-text">
+          <div class="menu-badge">🧠 ذكاء ومكر • وضع الكارتا للثورة الجزائرية</div>
+          <h2>أوراقك في هاتفك وحدك… والانتصار للذكي!</h2>
+          <p>
+            كل لاعب يمتلك بطاقاته في هاتفه فقط ولا يرى أوراق غيره. حلّل رميات الخصوم بالأنيميشن على الطاولة واكشف الخائن بذكائك.
+          </p>
+        </div>
+        <div class="mini-cards-showcase" aria-hidden="true">
+          <div class="mini-card c1">📡<span>فداء</span></div>
+          <div class="mini-card c2">🗝️<span>تحرير</span></div>
+          <div class="mini-card c3">★<span>انتصار</span></div>
+        </div>
+      </div>
+
+      <div class="pro-menu-list">
+        <button id="btn-new-game" class="pro-menu-btn primary-card" type="button">
+          <div class="pro-btn-left">
+            <div class="pro-btn-icon">🎮</div>
+            <div>
+              <span class="pro-btn-title">بدء لعبة جديدة</span>
+              <span class="pro-btn-sub">وضع الكارتا الجماعي لـ 15 لاعباً أو أي عدد تختاره</span>
+            </div>
+          </div>
+          <span class="pro-btn-arrow">◀</span>
+        </button>
+
+        <button id="btn-bots-mode" class="pro-menu-btn bots-card" type="button">
+          <div class="pro-btn-left">
+            <div class="pro-btn-icon">🤖</div>
+            <div>
+              <span class="pro-btn-title">اللعب ضد الروبوتات</span>
+              <span class="pro-btn-sub">تحدَّ دهاء ومكر المناضلين الآليين في قمم الأوراس</span>
+            </div>
+          </div>
+          <span class="pro-btn-arrow">◀</span>
+        </button>
+
+        <button id="btn-rules" class="pro-menu-btn rules-card" type="button">
+          <div class="pro-btn-left">
+            <div class="pro-btn-icon">📖</div>
+            <div>
+              <span class="pro-btn-title">دليل اللعب</span>
+              <span class="pro-btn-sub">قواعد وضع الكارتا والتحليل وكيفية تحقيق الانتصار</span>
+            </div>
+          </div>
+          <span class="pro-btn-arrow">◀</span>
+        </button>
+      </div>
+
+      <div class="menu-stats-bar">
+        <div class="stat-pill"><strong>📱 خصوصية تامة</strong>أوراقك في هاتفك فقط</div>
+        <div class="stat-pill"><strong>🃏 وضع الكارتا</strong>رمي بالأنيميشن الحي</div>
+        <div class="stat-pill"><strong>🧠 ذكاء ومكر</strong>حتى 15+ لاعباً</div>
+      </div>
+    </section>
+
+    <!-- 2. شاشة الإعداد -->
+    <section id="screen-setup" class="screen">
+      <h2 class="screen-title">إعداد خلية الكارتا</h2>
+      <div class="panel">
+        <p id="setup-mode-label" style="font-weight:700; color: var(--accent); margin-bottom:10px;">
+          الوضع الحالي: وضع الكارتا الجماعي
+        </p>
+
+        <div class="form-group">
+          <label>نوع القواعد:</label>
+          <div class="mode-switch-group">
+            <button id="btn-mode-carta" class="carta-btn active" type="button">🃏 وضع الكارتا (مكر وتحليل)</button>
+            <button id="btn-mode-classic" class="carta-btn" type="button">⚡ وضع المواجهة السريعة</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="player-count-range">
+            عدد اللاعبين: <span id="player-count-value" style="color: var(--accent);">15</span> لاعباً (يدعم 15 أو أي عدد من 2 إلى 20)
+          </label>
+          <input id="player-count-range" type="range" min="2" max="20" value="15" />
+          <div class="btn-row" style="margin-top:8px;">
+            <button id="btn-players-minus" class="btn-secondary" type="button">➖ إنقاص</button>
+            <button id="btn-players-plus" class="btn-secondary" type="button">➕ زيادة</button>
+          </div>
+          <div class="presets-row">
+            <button id="btn-preset-4" class="btn-secondary" type="button">4 لاعبين</button>
+            <button id="btn-preset-8" class="btn-secondary" type="button">8 لاعبين</button>
+            <button id="btn-preset-12" class="btn-secondary" type="button">12 لاعباً</button>
+            <button id="btn-preset-15" class="btn-primary" type="button">15 لاعباً</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>مستوى ذكاء ومكر الروبوتات:</label>
+          <div class="difficulty-group">
+            <button id="btn-diff-easy" class="diff-btn" type="button">سهل</button>
+            <button id="btn-diff-medium" class="diff-btn active" type="button">متوسط</button>
+            <button id="btn-diff-hard" class="diff-btn" type="button">صعب (ماكر)</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button id="btn-start-round" class="btn-primary" type="button">🚀 بدء الجولة</button>
+        <button id="btn-back-home-1" class="btn-secondary" type="button">↩️ رجوع</button>
+      </div>
+    </section>
+
+    <!-- 3. شاشة الدور السري -->
+    <section id="screen-role" class="screen">
+      <h2 class="screen-title">المهمة السرية في الثورة</h2>
+      <p class="desc-text">بطاقاتك ودورك في هاتفك وحدك. تأكد من عدم نظر الآخرين إلى شاشتك ثم اضغط "كشف الدور".</p>
+
+      <div class="role-box">
+        <div id="role-badge" class="role-badge">الهوية السرية مخفية 🔒</div>
+        <h3 id="role-title" style="font-size:1.35rem; margin-bottom:8px;">اضغط "كشف الدور" لمعرفة مهمتك</h3>
+        <p id="role-details" style="color: var(--text-muted);">
+          ستظهر هنا مهمتك السرية في الثورة الجزائرية لتحقيق الانتصار.
+        </p>
+      </div>
+
+      <div class="btn-row">
+        <button id="btn-reveal-role" class="btn-primary" type="button">👁️ كشف الدور</button>
+        <button id="btn-go-game" class="btn-success" type="button">🃏 الانتقال لطاولة الكارتا</button>
+      </div>
+    </section>
+
+    <!-- 4. ساحة اللعب (وضع الكارتا + خصوصية البطاقات + أنيميشن الرمي) -->
+    <section id="screen-game" class="screen">
+      <h2 class="screen-title">طاولة الكارتا الثورية</h2>
+
+      <!-- لافتة إعلانات قابلة للإغلاق -->
+      <div id="ad-banner" class="ad-banner">
+        <span>🇩🇿 تحية لأبطال الثورة الجزائرية — الذكاء والمكر يصنعان الانتصار!</span>
+        <button id="btn-close-ad" type="button">✖ إغلاق</button>
+      </div>
+
+      <!-- شريط الخصوصية ووضع الكارتا -->
+      <div class="privacy-strip">
+        <span>🔒 <strong>بطاقاتك في هاتفك فقط</strong> (أوراق الخصوم مخفية تماماً)</span>
+        <span id="game-mode-badge" style="color: var(--accent); font-weight:700;">🃏 وضع الكارتا</span>
+      </div>
+
+      <!-- شريط الاتصال الصوتي -->
+      <div class="voice-bar">
+        <div id="voice-status" class="voice-status">📞 لاسلكي الجبل: متصل</div>
+        <div class="voice-controls">
+          <button id="btn-mic" type="button">🎙️ ميكروفون: مفتوح</button>
+          <button id="btn-speaker" type="button">🔊 مكبر صوت: يعمل</button>
+          <button id="btn-leave-call" class="btn-danger" type="button">📵 إنهاء مكالمة</button>
+        </div>
+      </div>
+
+      <!-- شريط الخصوم (بطاقاتهم مخفية في هواتفهم) -->
+      <div id="opponents-strip" class="opponents-strip"></div>
+
+      <!-- طاولة الكارتا الوسطية مع عنصر الأنيميشن -->
+      <div class="uno-table">
+        <div id="turn-banner" class="turn-banner">دورك الآن: حلّل الطاولة وضع بطاقتك</div>
+
+        <!-- بطاقة الأنيميشن الطائرة عند الوضع -->
+        <div id="flying-card" class="uno-card flying-card color-red"></div>
+
+        <div class="table-piles">
+          <div>
+            <div style="font-size:0.78rem; color:#d1fae5; margin-bottom:4px;">البطاقة على الطاولة</div>
+            <div id="table-discard-card" class="uno-card color-red">
+              <span class="uno-corner top">5</span>
+              <div class="uno-card-oval">
+                <div class="uno-card-oval-inner">
+                  <div class="uno-card-main">5</div>
+                  <div class="uno-card-label">فداء</div>
+                </div>
+              </div>
+              <span class="uno-corner bottom">5</span>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size:0.78rem; color:#d1fae5; margin-bottom:4px;">كومة الكارتا</div>
+            <button id="btn-draw-card" class="draw-pile-btn" type="button">
+              <div class="deck-logo">كارتا</div>
+              <span>➕ اسحب بطاقة</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- لوحة اختيار اللون لبطاقة الجوكر -->
+      <div id="color-picker-panel">
+        <p style="font-weight:700; color: var(--accent);">اختر راية الكارتا القادمة (مناورة ذكية):</p>
+        <div class="color-choices">
+          <button id="btn-color-red" style="background: var(--uno-red);" type="button">🔴 فداء</button>
+          <button id="btn-color-blue" style="background: var(--uno-blue);" type="button">🔵 ساحل</button>
+          <button id="btn-color-green" style="background: var(--uno-green);" type="button">🟢 تحرير</button>
+          <button id="btn-color-gold" style="background: var(--uno-gold); color:#111;" type="button">🟡 انتصار</button>
+        </div>
+      </div>
+
+      <!-- يد اللاعب في هاتفه فقط -->
+      <div class="hand-header">
+        <span style="font-weight:700; font-size:0.93rem;">
+          📱 بطاقاتك في هاتفك فقط (<span id="my-hand-count">7</span>):
+        </span>
+        <button id="btn-uno-shout" class="uno-shout-btn" type="button">📣 انتصار! (كارتا)</button>
+      </div>
+
+      <div id="player-hand" class="uno-hand-fan">
+        <button id="btn-card-1" class="uno-card hand-card-btn" type="button"></button>
+        <button id="btn-card-2" class="uno-card hand-card-btn" type="button"></button>
+        <button id="btn-card-3" class="uno-card hand-card-btn" type="button"></button>
+        <button id="btn-card-4" class="uno-card hand-card-btn" type="button"></button>
+        <button id="btn-card-5" class="uno-card hand-card-btn" type="button"></button>
+        <button id="btn-card-6" class="uno-card hand-card-btn" type="button"></button>
+        <button id="btn-card-7" class="uno-card hand-card-btn" type="button"></button>
+        <button id="btn-card-8" class="uno-card hand-card-btn" type="button"></button>
+        <button id="btn-card-9" class="uno-card hand-card-btn" type="button"></button>
+        <button id="btn-card-10" class="uno-card hand-card-btn" type="button"></button>
+        <button id="btn-card-11" class="uno-card hand-card-btn" type="button"></button>
+        <button id="btn-card-12" class="uno-card hand-card-btn" type="button"></button>
+        <button id="btn-card-13" class="uno-card hand-card-btn" type="button"></button>
+        <button id="btn-card-14" class="uno-card hand-card-btn" type="button"></button>
+        <button id="btn-card-15" class="uno-card hand-card-btn" type="button"></button>
+        <button id="btn-card-16" class="uno-card hand-card-btn" type="button"></button>
+      </div>
+
+      <div id="game-event-log" class="event-log">
+        🧠 سجل التحليل والمكر: راقب كيف يضع اللاعبون بطاقاتهم على الطاولة لتكتشف نياتهم!
+      </div>
+
+      <div class="btn-row">
+        <button id="btn-go-vote" class="btn-primary" type="button">🗳️ إنهاء الدور والتصويت</button>
+      </div>
+    </section>
+
+    <!-- 5. شاشة التصويت والنتائج -->
+    <section id="screen-vote" class="screen">
+      <h2 class="screen-title">مجلس التحليل والتصويت</h2>
+      <p class="desc-text">بعد تحليل حركات اللاعبين ومكرهم في وضع الكارتا، صوّت على الدسيس الخائن واضغط "إعلان النتيجة".</p>
+
+      <div id="vote-grid" class="vote-grid">
+        <button id="btn-vote-0" class="vote-player-btn" type="button">اللاعب 1</button>
+        <button id="btn-vote-1" class="vote-player-btn" type="button">اللاعب 2</button>
+        <button id="btn-vote-2" class="vote-player-btn" type="button">اللاعب 3</button>
+        <button id="btn-vote-3" class="vote-player-btn" type="button">اللاعب 4</button>
+        <button id="btn-vote-4" class="vote-player-btn" type="button">اللاعب 5</button>
+        <button id="btn-vote-5" class="vote-player-btn" type="button">اللاعب 6</button>
+        <button id="btn-vote-6" class="vote-player-btn" type="button">اللاعب 7</button>
+        <button id="btn-vote-7" class="vote-player-btn" type="button">اللاعب 8</button>
+        <button id="btn-vote-8" class="vote-player-btn" type="button">اللاعب 9</button>
+        <button id="btn-vote-9" class="vote-player-btn" type="button">اللاعب 10</button>
+        <button id="btn-vote-10" class="vote-player-btn" type="button">اللاعب 11</button>
+        <button id="btn-vote-11" class="vote-player-btn" type="button">اللاعب 12</button>
+        <button id="btn-vote-12" class="vote-player-btn" type="button">اللاعب 13</button>
+        <button id="btn-vote-13" class="vote-player-btn" type="button">اللاعب 14</button>
+        <button id="btn-vote-14" class="vote-player-btn" type="button">اللاعب 15</button>
+        <button id="btn-vote-15" class="vote-player-btn" type="button">اللاعب 16</button>
+        <button id="btn-vote-16" class="vote-player-btn" type="button">اللاعب 17</button>
+        <button id="btn-vote-17" class="vote-player-btn" type="button">اللاعب 18</button>
+        <button id="btn-vote-18" class="vote-player-btn" type="button">اللاعب 19</button>
+        <button id="btn-vote-19" class="vote-player-btn" type="button">اللاعب 20</button>
+      </div>
+
+      <div id="vote-result-box" class="result-box">
+        <h3 id="result-headline" style="color: var(--accent); margin-bottom:6px;"></h3>
+        <p id="result-details"></p>
+      </div>
+
+      <div class="btn-row">
+        <button id="btn-finish-vote" class="btn-primary" type="button">⚖️ إعلان النتيجة</button>
+        <button id="btn-restart" class="btn-success" type="button">🔄 جولة جديدة</button>
+      </div>
+    </section>
+
+    <!-- 6. شاشة دليل اللعب -->
+    <section id="screen-rules" class="screen">
+      <h2 class="screen-title">دليل التحليل والمكر — وضع الكارتا</h2>
+      <ul class="rules-list">
+        <li><strong>سرّية البطاقات:</strong> كل لاعب يرى بطاقاته في هاتفه فقط، ولا تظهر أوراق الخصوم في هاتفك أبداً (تظهر مغلقة 🂠 فقط).</li>
+        <li><strong>وضع الكارتا بالأنيميشن:</strong> عندما تضع بطاقتك أو يضع الخصم بطاقته، تطير البطاقة بالأنيميشن نحو منتصف الطاولة.</li>
+        <li><strong>الذكاء والمكر:</strong> راقب من يغيّر الراية فجأة، أو يرمي بطاقات +2 وتخطي لإرباك الخلية، واستخدم تحليلك لكشف الخائن.</li>
+        <li><strong>العدد المرن:</strong> يمكنك اللعب بـ 15 لاعباً أو أي عدد من 2 إلى 20 لاعباً في جولة الثورة الجزائرية لتحقيق الانتصار.</li>
+      </ul>
+      <button id="btn-back-home-2" class="btn-secondary" type="button">↩️ رجوع للرئيسية</button>
+    </section>
+
+    <footer class="copyright-footer">
+      تامر إرد © 2026 - جميع الحقوق محفوظة - خلية الجبل: سرّ الخائن
+    </footer>
+  </div>
+
+  <!-- شريط التحقق والتشخيص في أسفل الشاشة -->
+  <div id="debug-bar">آخر ضغطة: لا يوجد | الشاشة الحالية: screen-home</div>
+
+  <script>
+    // الحالة العامة للعبة والبطاقات
+    var gameState = {
+      currentScreen: "screen-home",
+      lastButton: "لا يوجد",
+      mode: "جماعي",
+      cartaVariant: "وضع الكارتا",
+      playerCount: 15,
+      difficulty: "متوسط",
+      roleRevealed: false,
+      playerRole: "مجاهد محلّل في خلية الأوراس",
+      playerMission: "بطاقاتك في هاتفك فقط — استخدم الذكاء والمكر لتحقيق الانتصار.",
+      micOn: true,
+      speakerOn: true,
+      callActive: true,
+      selectedSuspectIndex: null,
+      traitorIndex: 2,
+      players: [],
+      hand: [],
+      // بطاقات الخصوم مخفية في هواتفهم: نخزّن هنا العدد فقط دون كشف أي ورقة على شاشتك
+      opponentCounts: [],
+      tableCard: { color: "red", value: "5", label: "فداء", icon: "5" },
+      activeColor: "red",
+      currentTurn: 0,
+      direction: 1,
+      waitingForColor: false,
+      unoShouted: false,
+      turnLocked: false,
+      isAnimating: false
+    };
+
+    var UNO_COLORS = ["red", "blue", "green", "gold"];
+    var COLOR_NAMES = {
+      red: "فداء (أحمر)",
+      blue: "ساحل (أزرق)",
+      green: "تحرير (أخضر)",
+      gold: "انتصار (ذهبي)",
+      wild: "جوكر نوفمبر"
+    };
+
+    var screenIds = [
+      "screen-home",
+      "screen-setup",
+      "screen-role",
+      "screen-game",
+      "screen-vote",
+      "screen-rules"
+    ];
+
+    // دالة موحدة لإظهار شاشة وإخفاء البقية عبر display: none / display: block فقط
+    function showScreen(screenId) {
+      for (var i = 0; i < screenIds.length; i++) {
+        var el = document.getElementById(screenIds[i]);
+        if (el) {
+          el.style.display = screenIds[i] === screenId ? "block" : "none";
+        }
+      }
+      gameState.currentScreen = screenId;
+      updateDebugBar(gameState.lastButton);
+    }
+
+    function updateDebugBar(buttonLabel) {
+      if (buttonLabel) {
+        gameState.lastButton = buttonLabel;
+      }
+      var bar = document.getElementById("debug-bar");
+      if (bar) {
+        bar.textContent =
+          "آخر ضغطة: " +
+          gameState.lastButton +
+          " | الشاشة الحالية: " +
+          gameState.currentScreen;
+      }
+    }
+
+    // مؤثرات صوتية بسيطة عبر Web Audio API داخل try/catch
+    var audioCtx = null;
+    function playTone(freq, durationMs, type) {
+      try {
+        var AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return;
+        if (!audioCtx) {
+          audioCtx = new AudioContextClass();
+        }
+        if (audioCtx.state === "suspended") {
+          audioCtx.resume();
+        }
+        var osc = audioCtx.createOscillator();
+        var gain = audioCtx.createGain();
+        osc.type = type || "sine";
+        osc.frequency.value = freq || 520;
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(
+          0.001,
+          audioCtx.currentTime + (durationMs || 120) / 1000
+        );
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + (durationMs || 120) / 1000);
+      } catch (e) {}
+    }
+
+    // نطق عربي عبر speechSynthesis داخل try/catch
+    function speakText(text) {
+      try {
+        if (!("speechSynthesis" in window)) return;
+        window.speechSynthesis.cancel();
+        var utter = new SpeechSynthesisUtterance(text);
+        utter.lang = "ar-SA";
+        utter.rate = 1.05;
+        window.speechSynthesis.speak(utter);
+      } catch (e) {}
+    }
+
+    function setPlayerCount(count) {
+      var val = Math.max(2, Math.min(20, parseInt(count, 10) || 15));
+      gameState.playerCount = val;
+      var range = document.getElementById("player-count-range");
+      var display = document.getElementById("player-count-value");
+      if (range) range.value = val;
+      if (display) display.textContent = val;
+    }
+
+    function setDifficulty(level) {
+      gameState.difficulty = level;
+      var map = {
+        "سهل": "btn-diff-easy",
+        "متوسط": "btn-diff-medium",
+        "صعب": "btn-diff-hard"
+      };
+      var keys = Object.keys(map);
+      for (var i = 0; i < keys.length; i++) {
+        var btn = document.getElementById(map[keys[i]]);
+        if (btn) {
+          if (keys[i] === level) {
+            btn.classList.add("active");
+          } else {
+            btn.classList.remove("active");
+          }
+        }
+      }
+    }
+
+    function setCartaVariant(variant) {
+      gameState.cartaVariant = variant;
+      var c1 = document.getElementById("btn-mode-carta");
+      var c2 = document.getElementById("btn-mode-classic");
+      if (c1) c1.classList.toggle("active", variant === "وضع الكارتا");
+      if (c2) c2.classList.toggle("active", variant === "مواجهة سريعة");
+      var badge = document.getElementById("game-mode-badge");
+      if (badge) badge.textContent = "🃏 " + variant;
+    }
+
+    // توليد بطاقة كارتا عشوائية بطابع الثورة الجزائرية
+    function createRandomCard(forceColor) {
+      var roll = Math.random();
+      var color = forceColor || UNO_COLORS[Math.floor(Math.random() * UNO_COLORS.length)];
+      if (!forceColor && roll < 0.14) {
+        return {
+          color: "wild",
+          value: "wild",
+          label: "نصر نوفمبر",
+          icon: "🗝️"
+        };
+      }
+      if (roll < 0.28) {
+        return { color: color, value: "+2", label: "نداء الأوراس", icon: "📡" };
+      }
+      if (roll < 0.40) {
+        return { color: color, value: "skip", label: "ضباب جرجرة", icon: "🌫️" };
+      }
+      if (roll < 0.52) {
+        return { color: color, value: "reverse", label: "شيفرة المكر", icon: "🔦" };
+      }
+      var num = String(Math.floor(Math.random() * 9) + 1);
+      return {
+        color: color,
+        value: num,
+        label: COLOR_NAMES[color].split(" ")[0],
+        icon: num
+      };
+    }
+
+    function isCardPlayable(card) {
+      if (!card) return false;
+      if (card.color === "wild") return true;
+      if (card.color === gameState.activeColor) return true;
+      if (card.value === gameState.tableCard.value) return true;
+      return false;
+    }
+
+    function renderCardInnerHTML(card, effectiveColor) {
+      var corner = card.icon;
+      var sub = card.label;
+      if (card.color === "wild" && effectiveColor && effectiveColor !== "wild") {
+        sub = COLOR_NAMES[effectiveColor].split(" ")[0];
+      }
+      return (
+        '<span class="uno-corner top">' + corner + "</span>" +
+        '<div class="uno-card-oval">' +
+        '  <div class="uno-card-oval-inner">' +
+        '    <div class="uno-card-main">' + card.icon + "</div>" +
+        '    <div class="uno-card-label">' + sub + "</div>" +
+        "  </div>" +
+        "</div>" +
+        '<span class="uno-corner bottom">' + corner + "</span>"
+      );
+    }
+
+    // أنيميشن وضع البطاقة على الطاولة (من يدك أو من خصم)
+    function animateCardThrow(card, effectiveColor, fromPlayer, onComplete) {
+      try {
+        var flyEl = document.getElementById("flying-card");
+        var tableEl = document.getElementById("table-discard-card");
+        if (!flyEl) {
+          if (onComplete) onComplete();
+          return;
+        }
+        gameState.isAnimating = true;
+        var col = effectiveColor || card.color;
+        flyEl.className =
+          "uno-card flying-card color-" +
+          col +
+          (fromPlayer ? " anim-from-player" : " anim-from-opponent");
+        flyEl.innerHTML = renderCardInnerHTML(card, col);
+        flyEl.style.display = "flex";
+
+        var animTime = fromPlayer ? 360 : 390;
+        setTimeout(function () {
+          try {
+            flyEl.style.display = "none";
+            flyEl.className = "uno-card flying-card";
+            if (tableEl) {
+              tableEl.classList.remove("anim-impact");
+              void tableEl.offsetWidth;
+              tableEl.classList.add("anim-impact");
+            }
+            gameState.isAnimating = false;
+            if (onComplete) onComplete();
+          } catch (err) {
+            gameState.isAnimating = false;
+            if (onComplete) onComplete();
+          }
+        }, animTime);
+      } catch (e) {
+        gameState.isAnimating = false;
+        if (onComplete) onComplete();
+      }
+    }
+
+    function renderTableAndHand() {
+      var tableEl = document.getElementById("table-discard-card");
+      if (tableEl) {
+        var displayColor = gameState.activeColor || gameState.tableCard.color;
+        tableEl.className = "uno-card color-" + displayColor;
+        tableEl.innerHTML = renderCardInnerHTML(gameState.tableCard, displayColor);
+      }
+
+      // شريط الخصوم: تظهر أوراقهم مغلقة في هواتفهم (🂠) ولا يظهر محتواها أبداً
+      var oppStrip = document.getElementById("opponents-strip");
+      if (oppStrip) {
+        var html = "";
+        for (var p = 1; p < gameState.playerCount; p++) {
+          var isTurn = gameState.currentTurn === p ? " active-turn" : "";
+          html +=
+            '<div class="opponent-chip' + isTurn + '">' +
+            '<div style="font-weight:700;">' + gameState.players[p] + "</div>" +
+            '<div class="hidden-backs"><span>📱</span><span>🂠 ×' +
+            gameState.opponentCounts[p] +
+            "</span></div>" +
+            "</div>";
+        }
+        oppStrip.innerHTML = html;
+      }
+
+      var turnBanner = document.getElementById("turn-banner");
+      if (turnBanner) {
+        if (gameState.waitingForColor) {
+          turnBanner.textContent = "اختر راية الكارتا الجديدة من الأسفل!";
+        } else if (gameState.currentTurn === 0) {
+          turnBanner.textContent =
+            "دورك (" + COLOR_NAMES[gameState.activeColor] + "): ضع بطاقتك بذكاء";
+        } else {
+          turnBanner.textContent =
+            gameState.players[gameState.currentTurn] + " يضع بطاقة من هاتفه...";
+        }
+      }
+
+      var countEl = document.getElementById("my-hand-count");
+      if (countEl) countEl.textContent = gameState.hand.length;
+
+      for (var i = 0; i < 16; i++) {
+        var btn = document.getElementById("btn-card-" + (i + 1));
+        if (!btn) continue;
+        if (i < gameState.hand.length) {
+          var card = gameState.hand[i];
+          var canPlay =
+            gameState.currentTurn === 0 &&
+            !gameState.waitingForColor &&
+            !gameState.turnLocked &&
+            !gameState.isAnimating &&
+            isCardPlayable(card);
+          btn.style.display = "flex";
+          btn.className =
+            "uno-card hand-card-btn color-" +
+            card.color +
+            (canPlay ? " playable" : " unplayable");
+          btn.innerHTML = renderCardInnerHTML(card, card.color);
+        } else {
+          btn.style.display = "none";
+          btn.innerHTML = "";
+        }
+      }
+
+      var picker = document.getElementById("color-picker-panel");
+      if (picker) {
+        picker.style.display = gameState.waitingForColor ? "block" : "none";
+      }
+    }
+
+    function logGameEvent(msg) {
+      var log = document.getElementById("game-event-log");
+      if (log) log.textContent = msg;
+    }
+
+    function nextPlayerIndex(step) {
+      var total = gameState.playerCount;
+      return (gameState.currentTurn + step * gameState.direction + total * 4) % total;
+    }
+
+    function applySpecialEffect(card, actorName) {
+      var suspect = gameState.players[gameState.traitorIndex] || "أحد الأعضاء";
+      if (card.value === "+2") {
+        var target = nextPlayerIndex(1);
+        if (target === 0) {
+          drawCardsForPlayer(2);
+          logGameEvent(
+            "🧠 تحليل المكر: " + actorName + " استهدفك بـ (📡 نداء الأوراس +2)! سحبتَ بطاقتين إلى هاتفك."
+          );
+        } else {
+          gameState.opponentCounts[target] += 2;
+          logGameEvent(
+            "🧠 تحليل المكر: " +
+              actorName +
+              " أرسل (📡 +2) إلى " +
+              gameState.players[target] +
+              " — إشارة استخبارية تشير لتوتر قرب " +
+              suspect +
+              "."
+          );
+        }
+        return 2;
+      }
+      if (card.value === "skip") {
+        var skipped = nextPlayerIndex(1);
+        logGameEvent(
+          "🧠 ذكاء ومكر: " +
+            actorName +
+            " وضع (🌫️ ضباب جرجرة) وتخطى " +
+            gameState.players[skipped] +
+            " لإرباك التحليل!"
+        );
+        return 2;
+      }
+      if (card.value === "reverse") {
+        gameState.direction *= -1;
+        logGameEvent(
+          "🧠 مناورة كارتا: " +
+            actorName +
+            " وضع (🔦 شيفرة المكر) وعكس الدور! القرائن تقترب من " +
+            suspect +
+            "."
+        );
+        return 1;
+      }
+      logGameEvent(
+        "🃏 " +
+          actorName +
+          " وضع بطاقة [" +
+          card.icon +
+          " - " +
+          COLOR_NAMES[gameState.activeColor] +
+          "] على الطاولة."
+      );
+      return 1;
+    }
+
+    function drawCardsForPlayer(n) {
+      for (var k = 0; k < n; k++) {
+        if (gameState.hand.length < 16) {
+          gameState.hand.push(createRandomCard());
+        }
+      }
+      gameState.unoShouted = false;
+    }
+
+    function advanceTurn(steps) {
+      gameState.currentTurn = nextPlayerIndex(steps || 1);
+      renderTableAndHand();
+      if (gameState.currentTurn !== 0) {
+        gameState.turnLocked = true;
+        // سرعة متوازنة إذا كان العدد 15 أو كبيراً
+        var delay = gameState.playerCount > 9 ? 260 : 450;
+        setTimeout(runBotTurn, delay);
+      } else {
+        gameState.turnLocked = false;
+        renderTableAndHand();
+      }
+    }
+
+    function runBotTurn() {
+      try {
+        if (gameState.currentScreen !== "screen-game") {
+          gameState.turnLocked = false;
+          return;
+        }
+        var p = gameState.currentTurn;
+        if (p === 0) {
+          gameState.turnLocked = false;
+          renderTableAndHand();
+          return;
+        }
+        var botName = gameState.players[p] || "المناضل";
+        var playChance =
+          gameState.difficulty === "صعب" ? 0.88 : gameState.difficulty === "متوسط" ? 0.75 : 0.58;
+
+        if (Math.random() < playChance && gameState.opponentCounts[p] > 0) {
+          var botCard = createRandomCard(Math.random() < 0.22 ? null : gameState.activeColor);
+          var chosenColor =
+            botCard.color === "wild"
+              ? UNO_COLORS[Math.floor(Math.random() * UNO_COLORS.length)]
+              : botCard.color;
+
+          playTone(430, 85, "triangle");
+
+          // الخصم يضع البطاقة بالأنيميشن من الأعلى نحو الطاولة
+          animateCardThrow(botCard, chosenColor, false, function () {
+            gameState.activeColor = chosenColor;
+            gameState.tableCard = botCard;
+            gameState.opponentCounts[p] = Math.max(0, gameState.opponentCounts[p] - 1);
+
+            if (gameState.opponentCounts[p] === 0) {
+              logGameEvent(
+                "🏁 " +
+                  botName +
+                  " أنهى بطاقاته السرية في هاتفه! انتقلوا الآن للتصويت لتحقيق الانتصار."
+              );
+              gameState.currentTurn = 0;
+              gameState.turnLocked = false;
+              renderTableAndHand();
+              return;
+            }
+
+            var step = applySpecialEffect(botCard, botName);
+            advanceTurn(step);
+          });
+        } else {
+          gameState.opponentCounts[p] += 1;
+          logGameEvent(
+            "🃏 " + botName + " لم يجد مطابقة (أو يمارس المكر!) وسحب بطاقة سرية إلى هاتفه."
+          );
+          advanceTurn(1);
+        }
+      } catch (e) {
+        gameState.currentTurn = 0;
+        gameState.turnLocked = false;
+        gameState.isAnimating = false;
+        renderTableAndHand();
+      }
+    }
+
+    function playHandCard(index) {
+      if (gameState.isAnimating) return;
+      if (gameState.waitingForColor) {
+        logGameEvent("⚠️ اختر راية اللعب أولاً من اللوحة أعلاه!");
+        return;
+      }
+      if (gameState.currentTurn !== 0 || gameState.turnLocked) {
+        logGameEvent("⏳ انتظر دورك بينما يضع اللاعبون بطاقاتهم على الطاولة.");
+        return;
+      }
+      var card = gameState.hand[index];
+      if (!card) return;
+
+      if (!isCardPlayable(card)) {
+        playTone(210, 140, "sawtooth");
+        logGameEvent(
+          "❌ هذه البطاقة لا تطابق الراية (" +
+            COLOR_NAMES[gameState.activeColor] +
+            ") ولا الرمز (" +
+            gameState.tableCard.icon +
+            ")!"
+        );
+        return;
+      }
+
+      // إزالة البطاقة من هاتفك ورميها بالأنيميشن نحو الطاولة
+      gameState.hand.splice(index, 1);
+      renderTableAndHand();
+      playTone(680, 110, "triangle");
+
+      var targetColor = card.color === "wild" ? gameState.activeColor : card.color;
+      animateCardThrow(card, targetColor, true, function () {
+        gameState.tableCard = card;
+
+        if (gameState.hand.length === 0) {
+          gameState.activeColor = card.color === "wild" ? "gold" : card.color;
+          renderTableAndHand();
+          logGameEvent(
+            "🏆 انتصار باهر في وضع الكارتا! فرغتَ أوراق هاتفك بذكاء — اضغط (إنهاء الدور والتصويت) لعزل الخائن."
+          );
+          speakText("انتصار في وضع الكارتا، انتقلوا الآن للتصويت");
+          return;
+        }
+
+        if (card.color === "wild") {
+          gameState.waitingForColor = true;
+          logGameEvent("🗝️ لعبتَ بطاقة (نصر نوفمبر)! اختر الراية بذكاء لإرباك الخصوم.");
+          renderTableAndHand();
+          return;
+        }
+
+        gameState.activeColor = card.color;
+        var step = applySpecialEffect(card, "أنت (قائد الخلية)");
+        advanceTurn(step);
+      });
+    }
+
+    function prepareRound() {
+      gameState.roleRevealed = false;
+      gameState.selectedSuspectIndex = null;
+      gameState.micOn = true;
+      gameState.speakerOn = true;
+      gameState.callActive = true;
+      gameState.currentTurn = 0;
+      gameState.direction = 1;
+      gameState.waitingForColor = false;
+      gameState.unoShouted = false;
+      gameState.turnLocked = false;
+      gameState.isAnimating = false;
+
+      gameState.players = [];
+      gameState.opponentCounts = [];
+      for (var i = 0; i < gameState.playerCount; i++) {
+        if (i === 0) {
+          gameState.players.push("أنت (هاتفك)");
+        } else if (gameState.mode === "ضد الروبوتات") {
+          gameState.players.push("مجاهد " + i);
+        } else {
+          gameState.players.push("مناضل " + (i + 1));
+        }
+        gameState.opponentCounts.push(7);
+      }
+
+      gameState.traitorIndex = Math.floor(Math.random() * gameState.playerCount);
+      if (gameState.traitorIndex === 0) {
+        gameState.playerRole = "الدسيس الخائن الماكر 🗡️";
+        gameState.playerMission =
+          "اعتمد على المكر في وضع الكارتا لخداع خلية الثورة الجزائرية دون أن ينكشف سرك!";
+      } else {
+        var loyalRoles = [
+          "فدائي التحليل في الأوراس 🧠",
+          "مناضل الإشارات اللاسلكية 📡",
+          "كشّاف الذكاء في جرجرة 🔦"
+        ];
+        gameState.playerRole =
+          loyalRoles[Math.floor(Math.random() * loyalRoles.length)];
+        gameState.playerMission =
+          "مهمتك كشف الخائن وتحقيق الانتصار للثورة! تحليلات الاستخبارات تشتبه في (" +
+          gameState.players[gameState.traitorIndex] +
+          ").";
+      }
+
+      var startColor = UNO_COLORS[Math.floor(Math.random() * UNO_COLORS.length)];
+      var startNum = String(Math.floor(Math.random() * 8) + 2);
+      gameState.tableCard = {
+        color: startColor,
+        value: startNum,
+        label: COLOR_NAMES[startColor].split(" ")[0],
+        icon: startNum
+      };
+      gameState.activeColor = startColor;
+
+      // بطاقاتك في هاتفك فقط
+      gameState.hand = [];
+      gameState.hand.push(createRandomCard(startColor));
+      gameState.hand.push(createRandomCard(startColor));
+      for (var c = 2; c < 7; c++) {
+        gameState.hand.push(createRandomCard());
+      }
+
+      var roleBadge = document.getElementById("role-badge");
+      var roleTitle = document.getElementById("role-title");
+      var roleDetails = document.getElementById("role-details");
+      if (roleBadge) roleBadge.textContent = "الهوية السرية مخفية 🔒";
+      if (roleTitle) roleTitle.textContent = 'اضغط "كشف الدور" لمعرفة مهمتك';
+      if (roleDetails) {
+        roleDetails.textContent =
+          "ستظهر هنا مهمتك السرية في الثورة الجزائرية لتحقيق الانتصار.";
+      }
+
+      var adBanner = document.getElementById("ad-banner");
+      if (adBanner) adBanner.style.display = "flex";
+
+      var flyEl = document.getElementById("flying-card");
+      if (flyEl) flyEl.style.display = "none";
+
+      updateVoiceUI();
+      renderTableAndHand();
+      logGameEvent(
+        "🔒 بطاقاتك في هاتفك فقط (" +
+          gameState.playerCount +
+          " لاعبين - " +
+          gameState.cartaVariant +
+          "): ضع بطاقة تطابق (" +
+          COLOR_NAMES[startColor] +
+          ") أو (" +
+          startNum +
+          ") بالأنيميشن!"
+      );
+
+      var resultBox = document.getElementById("vote-result-box");
+      if (resultBox) resultBox.style.display = "none";
+      renderVoteButtons();
+    }
+
+    function updateVoiceUI() {
+      var statusEl = document.getElementById("voice-status");
+      var micBtn = document.getElementById("btn-mic");
+      var spkBtn = document.getElementById("btn-speaker");
+      var leaveBtn = document.getElementById("btn-leave-call");
+
+      if (statusEl) {
+        statusEl.textContent = gameState.callActive
+          ? "📞 لاسلكي الجبل: متصل"
+          : "📵 لاسلكي الجبل: مقطوع";
+        statusEl.style.color = gameState.callActive ? "#2ea063" : "#d64545";
+      }
+      if (micBtn) {
+        micBtn.textContent = gameState.micOn
+          ? "🎙️ ميكروفون: مفتوح"
+          : "🎙️ ميكروفون: مكتوم";
+        micBtn.classList.toggle("muted", !gameState.micOn);
+      }
+      if (spkBtn) {
+        spkBtn.textContent = gameState.speakerOn
+          ? "🔊 مكبر صوت: يعمل"
+          : "🔇 مكبر صوت: صامت";
+        spkBtn.classList.toggle("muted", !gameState.speakerOn);
+      }
+      if (leaveBtn) {
+        leaveBtn.textContent = gameState.callActive
+          ? "📵 إنهاء مكالمة"
+          : "📞 إعادة الاتصال";
+      }
+    }
+
+    function renderVoteButtons() {
+      for (var i = 0; i < 20; i++) {
+        var btn = document.getElementById("btn-vote-" + i);
+        if (!btn) continue;
+        btn.classList.remove("selected");
+        if (i < gameState.playerCount) {
+          btn.style.display = "block";
+          btn.textContent = "🗳️ " + gameState.players[i];
+        } else {
+          btn.style.display = "none";
+        }
+      }
+    }
+
+    function safeBind(buttonId, label, handler) {
+      try {
+        var btn = document.getElementById(buttonId);
+        if (!btn) return;
+        btn.addEventListener("click", function () {
+          try {
+            updateDebugBar(label + " (#" + buttonId + ")");
+            playTone(520, 85, "sine");
+            handler(btn);
+            updateDebugBar(label + " (#" + buttonId + ")");
+          } catch (innerErr) {
+            console.error("خطأ أثناء تنفيذ زر:", buttonId, innerErr);
+          }
+        });
+      } catch (outerErr) {
+        console.error("خطأ أثناء ربط زر:", buttonId, outerErr);
+      }
+    }
+
+    // ربط جميع الأزرار في نهاية الصفحة داخل try/catch
+    function bindAllButtons() {
+      // الشاشة الرئيسية
+      safeBind("btn-new-game", "بدء لعبة جديدة", function () {
+        gameState.mode = "جماعي";
+        var lbl = document.getElementById("setup-mode-label");
+        if (lbl) lbl.textContent = "الوضع الحالي: وضع الكارتا الجماعي";
+        showScreen("screen-setup");
+      });
+
+      safeBind("btn-bots-mode", "اللعب ضد الروبوتات", function () {
+        gameState.mode = "ضد الروبوتات";
+        var lbl = document.getElementById("setup-mode-label");
+        if (lbl) lbl.textContent = "الوضع الحالي: ضد الروبوتات الماكرة";
+        showScreen("screen-setup");
+      });
+
+      safeBind("btn-rules", "دليل اللعب", function () {
+        showScreen("screen-rules");
+      });
+
+      safeBind("btn-back-home-2", "رجوع من الدليل", function () {
+        showScreen("screen-home");
+      });
+
+      // شاشة الإعداد
+      safeBind("btn-mode-carta", "اختيار وضع الكارتا", function () {
+        setCartaVariant("وضع الكارتا");
+      });
+
+      safeBind("btn-mode-classic", "اختيار مواجهة سريعة", function () {
+        setCartaVariant("مواجهة سريعة");
+      });
+
+      try {
+        var rangeInput = document.getElementById("player-count-range");
+        if (rangeInput) {
+          rangeInput.addEventListener("input", function () {
+            try {
+              setPlayerCount(rangeInput.value);
+              updateDebugBar("تغيير عدد اللاعبين (" + rangeInput.value + ")");
+            } catch (e) {}
+          });
+        }
+      } catch (e) {}
+
+      safeBind("btn-players-minus", "إنقاص لاعب", function () {
+        setPlayerCount(gameState.playerCount - 1);
+      });
+
+      safeBind("btn-players-plus", "زيادة لاعب", function () {
+        setPlayerCount(gameState.playerCount + 1);
+      });
+
+      safeBind("btn-preset-4", "اختيار 4 لاعبين", function () {
+        setPlayerCount(4);
+      });
+      safeBind("btn-preset-8", "اختيار 8 لاعبين", function () {
+        setPlayerCount(8);
+      });
+      safeBind("btn-preset-12", "اختيار 12 لاعباً", function () {
+        setPlayerCount(12);
+      });
+      safeBind("btn-preset-15", "اختيار 15 لاعباً", function () {
+        setPlayerCount(15);
+      });
+
+      safeBind("btn-diff-easy", "صعوبة سهل", function () {
+        setDifficulty("سهل");
+      });
+
+      safeBind("btn-diff-medium", "صعوبة متوسط", function () {
+        setDifficulty("متوسط");
+      });
+
+      safeBind("btn-diff-hard", "صعوبة صعب", function () {
+        setDifficulty("صعب");
+      });
+
+      safeBind("btn-start-round", "بدء الجولة", function () {
+        prepareRound();
+        showScreen("screen-role");
+        speakText("بدأت جولة الكارتا، اكشف دورك السري");
+      });
+
+      safeBind("btn-back-home-1", "رجوع للرئيسية", function () {
+        showScreen("screen-home");
+      });
+
+      // شاشة الدور السري
+      safeBind("btn-reveal-role", "كشف الدور", function () {
+        gameState.roleRevealed = !gameState.roleRevealed;
+        var roleBadge = document.getElementById("role-badge");
+        var roleTitle = document.getElementById("role-title");
+        var roleDetails = document.getElementById("role-details");
+
+        if (gameState.roleRevealed) {
+          if (roleBadge) roleBadge.textContent = "تم كشف الهوية الثورية 🔓";
+          if (roleTitle) roleTitle.textContent = gameState.playerRole;
+          if (roleDetails) roleDetails.textContent = gameState.playerMission;
+          playTone(740, 180, "triangle");
+          speakText("دورك هو " + gameState.playerRole);
+        } else {
+          if (roleBadge) roleBadge.textContent = "الهوية السرية مخفية 🔒";
+          if (roleTitle) roleTitle.textContent = 'اضغط "كشف الدور" لمعرفة مهمتك';
+          if (roleDetails) {
+            roleDetails.textContent =
+              "ستظهر هنا مهمتك السرية في الثورة الجزائرية لتحقيق الانتصار.";
+          }
+        }
+      });
+
+      safeBind("btn-go-game", "الانتقال للعب", function () {
+        renderTableAndHand();
+        showScreen("screen-game");
+      });
+
+      // ساحة اللعب: الاتصال الصوتي والإعلان
+      safeBind("btn-mic", "ميكروفون", function () {
+        gameState.micOn = !gameState.micOn;
+        updateVoiceUI();
+      });
+
+      safeBind("btn-speaker", "مكبر صوت", function () {
+        gameState.speakerOn = !gameState.speakerOn;
+        updateVoiceUI();
+      });
+
+      safeBind("btn-leave-call", "إنهاء مكالمة", function () {
+        gameState.callActive = !gameState.callActive;
+        updateVoiceUI();
+        playTone(gameState.callActive ? 600 : 300, 150, "sawtooth");
+      });
+
+      safeBind("btn-close-ad", "إغلاق الإعلان", function () {
+        var ad = document.getElementById("ad-banner");
+        if (ad) ad.style.display = "none";
+      });
+
+      // ساحة اللعب: بطاقات يد اللاعب في هاتفه فقط (#btn-card-1 إلى #btn-card-16)
+      for (var c = 0; c < 16; c++) {
+        (function (cardIdx) {
+          safeBind("btn-card-" + (cardIdx + 1), "وضع بطاقة " + (cardIdx + 1), function () {
+            playHandCard(cardIdx);
+          });
+        })(c);
+      }
+
+      // سحب بطاقة من كومة الكارتا
+      safeBind("btn-draw-card", "سحب بطاقة", function () {
+        if (gameState.isAnimating) return;
+        if (gameState.waitingForColor) {
+          logGameEvent("⚠️ اختر راية اللعب أولاً قبل السحب!");
+          return;
+        }
+        if (gameState.currentTurn !== 0 || gameState.turnLocked) {
+          logGameEvent("⏳ انتظر دورك للسحب.");
+          return;
+        }
+        if (gameState.hand.length >= 16) {
+          logGameEvent("🃏 هاتفك يحمل 16 بطاقة! ضع بطاقة أو انتقل للتصويت.");
+          return;
+        }
+        var drawn = createRandomCard();
+        gameState.hand.push(drawn);
+        gameState.unoShouted = false;
+        playTone(580, 110, "sine");
+        logGameEvent(
+          "➕ سحبتَ بطاقة سرية إلى هاتفك [" + drawn.icon + " " + COLOR_NAMES[drawn.color] + "]."
+        );
+        if (!isCardPlayable(drawn)) {
+          advanceTurn(1);
+        } else {
+          renderTableAndHand();
+        }
+      });
+
+      // صيحة انتصار! (كارتا)
+      safeBind("btn-uno-shout", "صيحة انتصار (كارتا)", function () {
+        gameState.unoShouted = true;
+        playTone(880, 180, "triangle");
+        logGameEvent(
+          "📣 صيحة ذكية: انتصار! (كارتا) — بقي في هاتفك " + gameState.hand.length + " بطاقات."
+        );
+        speakText("انتصار! تحيا الثورة الجزائرية!");
+      });
+
+      // اختيار الراية لبطاقة الجوكر
+      var colorMap = {
+        "btn-color-red": "red",
+        "btn-color-blue": "blue",
+        "btn-color-green": "green",
+        "btn-color-gold": "gold"
+      };
+      Object.keys(colorMap).forEach(function (cid) {
+        var colVal = colorMap[cid];
+        safeBind(cid, "اختيار راية " + COLOR_NAMES[colVal], function () {
+          gameState.activeColor = colVal;
+          gameState.waitingForColor = false;
+          logGameEvent("🇩🇿 مناورة ذكية: تم تحويل راية الكارتا إلى (" + COLOR_NAMES[colVal] + ")!");
+          advanceTurn(1);
+        });
+      });
+
+      safeBind("btn-go-vote", "إنهاء الدور والتصويت", function () {
+        renderVoteButtons();
+        showScreen("screen-vote");
+        speakText("حان وقت التصويت وتحليل المكر لتحقيق الانتصار");
+      });
+
+      // شاشة التصويت والنتائج (حتى 20 لاعباً)
+      for (var v = 0; v < 20; v++) {
+        (function (idx) {
+          safeBind("btn-vote-" + idx, "تصويت على اللاعب " + (idx + 1), function () {
+            gameState.selectedSuspectIndex = idx;
+            for (var j = 0; j < 20; j++) {
+              var other = document.getElementById("btn-vote-" + j);
+              if (other) {
+                other.classList.toggle("selected", j === idx);
+              }
+            }
+          });
+        })(v);
+      }
+
+      safeBind("btn-finish-vote", "إعلان النتيجة", function () {
+        var box = document.getElementById("vote-result-box");
+        var head = document.getElementById("result-headline");
+        var det = document.getElementById("result-details");
+        if (!box || !head || !det) return;
+
+        box.style.display = "block";
+        var traitorName =
+          gameState.players[gameState.traitorIndex] || "الخائن";
+
+        if (gameState.selectedSuspectIndex === null) {
+          head.textContent = "⚠️ لم تختر مشتبهاً به بعد!";
+          det.textContent = "يرجى النقر على اسم أحد أفراد الخلية أولاً ثم إعلان النتيجة.";
+          return;
+        }
+
+        var chosenName = gameState.players[gameState.selectedSuspectIndex];
+        if (gameState.selectedSuspectIndex === gameState.traitorIndex) {
+          head.textContent = "🇩🇿🎉 انتصار الذكاء! نصر عظيم للثورة الجزائرية";
+          det.textContent =
+            "بفضل تحليلك وكشف مكر الخصم، تم عزل الدسيس الخائن (" +
+            chosenName +
+            ") — تحقّق الانتصار الكامل لخلية الجبل!";
+          playTone(880, 220, "triangle");
+          speakText("انتصار الذكاء! نصر عظيم للثورة الجزائرية");
+        } else {
+          head.textContent = "❌ خدعكم بمكره! تصويت خاطئ";
+          det.textContent =
+            "صوّتَّ ضد (" +
+            chosenName +
+            ") البريء، بينما الدسيس الماكر كان (" +
+            traitorName +
+            "). استخدم تحليلاً أدق في الجولة القادمة لتحقيق الانتصار!";
+          playTone(240, 260, "sawtooth");
+          speakText("خدعكم بمكره، أعيدوا التحليل لتحقيق الانتصار");
+        }
+      });
+
+      safeBind("btn-restart", "جولة جديدة", function () {
+        showScreen("screen-setup");
+      });
+    }
+
+    // التشغيل المبدئي عند تحميل الصفحة
+    try {
+      bindAllButtons();
+      setCartaVariant("وضع الكارتا");
+      setPlayerCount(15);
+      setDifficulty("متوسط");
+      showScreen("screen-home");
+    } catch (initErr) {
+      console.error("خطأ في التهيئة:", initErr);
+    }
+  </script>
+</body>
+</html>
